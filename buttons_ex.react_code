@@ -1,0 +1,40 @@
+App.js code
+
+/*import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+
+
+class App extends React.Component {
+constructor(props)
+{
+  super(props);
+  this.state={
+    clicks:0,
+  };
+}
+Increment=()=>{
+  this.setState({clicks:this.state.clicks+1});
+}
+Decrement=()=>{
+  this.setState({clicks:this.state.clicks-1});
+}
+
+render()
+{
+  return(
+    <div>
+      <button onClick={this.Increment}>Click to Increment by 1</button>
+      <button onClick={this.Decrement}>Click to Decrement by 1</button>
+      
+         <h2>{ this.state.clicks }</h2>  
+     
+     
+    </div>
+  );
+}
+
+}
+
+
+export default App;*/
