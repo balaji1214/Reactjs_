@@ -1,0 +1,43 @@
+App.js
+
+
+
+
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import jsondata from "./jsondata.json";
+
+class App extends React.Component {
+  renderHead = item => (
+    <tr>
+      <td>{item.id}</td>
+      <td>{item.name}</td>
+      <td>{item.age}</td>
+      <td>{item.salary}</td>
+      <td>{item.DOJ}</td>
+    </tr> 
+  );
+  render() {
+    return (
+      <div className="App">
+        <table border='1' cellspacing='0' cellPadding='4'>
+          <thead>
+            <tr>
+              <th>ID</th> 
+              <th>NAME</th>
+              <th>AGE</th>
+              <th>Salary</th>
+              <th>DOJ</th>
+            </tr>
+          </thead>
+          <tbody>{jsondata.map(item => this.renderHead(item))}</tbody> 
+        </table>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
