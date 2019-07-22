@@ -1,0 +1,75 @@
+//App.js
+
+{
+
+  constructor(props)
+  {
+    super(props);
+    this.state={fname:'',
+                lname:''
+              ,isGoing: true};
+    this.TextBox1=this.TextBox1.bind(this);
+
+    this.TextBox2=this.TextBox2.bind(this);
+
+
+    this.CheckBox1=this.CheckBox1.bind(this);
+  }
+    TextBox1(parameter1)
+    {
+      this.setState({fname:parameter1.target.value})
+    }
+    TextBox2(parameter2)
+    {
+      this.setState({lname:parameter2.target.value})
+    }
+    CheckBox1(parameter3)
+    {
+      const target=parameter3.target;
+      const value=target.type==='checkbox3'?target.checked:target.value;
+      const name=target.name;
+      this.setState({
+        [name]:value
+      })
+    }
+    render()
+    {
+      return(
+        <form>
+        <div> 
+        <label >FirstName </label>
+          <input type='text' val={this.state.fname} onChange={this.TextBox1} placeholder='Fname'/>
+          <br/>
+          <label >LastName </label>
+        <input type="text" textbox2value={this.state.lname} onChange={this.TextBox2} placeholder="lastname"/><br />
+        <label >Intrested courses </label><br/><b> C</b><input type='checkbox' checked={this.state.isGoing} onChange={this.CheckBox1} />
+          </div>
+          <table border='3'>
+            <tr>
+            <th>
+              Fname
+              </th>
+              <th>
+              Lname
+              </th>
+              </tr>
+              <tr>
+                <td>
+                {this.state.fname}
+                  </td>
+                  <td>
+                {this.state.lname}
+                  </td>
+                  <td>
+                {this.state.isGoing}
+                  </td>
+              </tr>
+            </table>
+          <h2></h2> 
+         
+        </form>
+      );
+    }
+
+  
+}
