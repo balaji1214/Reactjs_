@@ -1,0 +1,47 @@
+
+//HelloReact.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+class _3rd  extends React.Component
+{
+    render()
+    {
+        return(
+            <div>
+                <table  class="table table-striped" border='3' cellspacing='0' cellpadding='4'>
+                    <tr>
+                        <th >
+                            ID
+                        </th>
+                        <th>Value1</th>
+                        <th>value2</th>
+                        <th>Exponent</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>{2}</td>
+                        <td>{2}</td>
+                        <td>{2**2}</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>{3}</td>
+                        <td>{3}</td>
+                        <td>{3**3}</td>
+                    </tr>
+                    
+                    </table>
+                </div>
+        )
+    }
+}
+export default _3rd;
+
+
+//index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import _3rd from './HelloReact';
+
+ReactDOM.render(<_3rd/>,document.getElementById('root'))
