@@ -1,0 +1,30 @@
+//app.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class State1 extends React.Component
+{
+  
+  
+   
+    state={name:'raghu',
+                age:'25',
+                salary:'2000'};
+
+    render()
+    {
+    return(
+     <p>{this.state.name}-{this.state.age}-{this.state.salary}</p> 
+    );
+  }
+
+
+}
+export default State1;
+
+//index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import State1 from './App';
+ReactDOM.render(<State1/>,document.body)
