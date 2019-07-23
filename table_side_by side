@@ -1,0 +1,43 @@
+   
+<strong>Using display: inline-block; </strong><br>
+    <table border=1 class="inlineTable">
+        <tr>
+            <td>Cell content</td>
+            <td>Cell content</td>
+            <td>Cell content</td>
+        </tr>
+    </table>
+    <table border=1 class="inlineTable">
+        <tr>
+            <td>Cell content</td>
+            <td>Cell content</td>
+            <td>Cell content</td>
+        </tr>
+    </table>
+
+<hr>
+<strong>Using float: left; </strong><br>
+   <table border=1 class="floatedTable">
+        <tr>
+            <td>Cell content</td>
+            <td>Cell content</td>
+            <td>Cell content</td>
+        </tr>
+    </table>
+    <table border=1 class="floatedTable">
+        <tr>
+            <td>Cell content</td>
+            <td>Cell content</td>
+            <td>Cell content</td>
+        </tr>
+    </table>
+    
+    
+    
+    //css code
+     .floatedTable {
+            float:left;
+        }
+        .inlineTable {
+            display: inline-block;
+        }
