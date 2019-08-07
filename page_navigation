@@ -1,0 +1,5 @@
+Q:How do I redirect in react?
+
+If you have routes in your React app, you're probably using React Router (or React Router DOM) 
+to set up your routes. Considering you've already installed the React Router library,
+the easiest way to redirect to a new location is by using its Redirect component
