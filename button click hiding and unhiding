@@ -1,0 +1,14 @@
+ state={
+        visible:false,
+        
+    };
+    render() 
+    {
+        return(
+        
+            <div>
+                {this.state.visible?<Comp2/>:null}
+                <button onClick={()=>{this.setState({visible:true})}}>Component2</button>  //display
+                <button onClick={()=>{this.setState({visible:false})}}>Hide</button>       //Hide 
+    );
+    }
