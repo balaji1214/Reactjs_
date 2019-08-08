@@ -1,0 +1,52 @@
+//App.js
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+class App extends React.Component {
+  state = { name: "somex", age: "21" };
+  Change = () => {
+    this.setState({
+      age: "23"
+    });
+  };
+  Change2 = () => {
+    this.setState({
+      name: "somez"
+    });
+  };
+  Change3=()=>
+  {
+    this.setState({
+      name:'changed to original'
+    })
+
+  }
+Change4=(name1)=>{
+this.setState({
+  name:name1
+})
+}
+Change5=(name2)=>
+{
+  this.setState({name:name2})
+}
+onTextboxinput=(param1)=>{
+this.setState({name:ptarget.valuearam1.})
+}
+  render() {
+    return (
+      <div className="App">
+        <p>{this.state.name}</p>
+        <button onClick={this.Change}>change</button>
+        <button onClick={this.Change2}>Change2</button>
+        <button onClick={this.Change3}>Change3</button>
+        <button onClick={()=>this.Change4('value from parameters')}>Via parameters Passing</button>
+        <button onClick={this.Change5.bind(this,'via bind')}>Via this.bind</button>
+       <input type='text' onChange={this.onTextboxinput}/>
+        <p>{this.state.age}</p>
+      </div>
+    );
+  }
+}
+export default App;
