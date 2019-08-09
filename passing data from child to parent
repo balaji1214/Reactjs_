@@ -1,0 +1,64 @@
+//App.js
+
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Parent1 from './Parent';
+function App() {
+  return (
+    <div className="App">
+     <Parent1/>
+    </div>
+  );
+}
+
+export default App;
+
+child to parent data passed by using only functions
+
+
+//Parent.js
+import React from "react";
+import Child2 from "./Child1";   //importing child component to pass data to it
+
+export default class Parent1 extends React.Component {
+    constructor() {
+        super();
+        this.callbackFunction = this.callbackFunction.bind(this);//binding function to display in browser every time 
+      }
+  state = { message1: "" };
+  callbackFunction(childData) {
+    this.setState({ message1: childData });
+  }
+  render() {
+    return (
+      <div>
+        
+        <Child2 parentCallback={this.callbackFunction} />  //passing data to child component
+        <p>{this.state.message1}</p>//displaying data on to browser
+      </div>
+    );
+  }
+}
+
+//Child1.js
+import React from "react";
+export default class Child2 extends React.Component {
+  constructor() {
+    super();
+    this.sendData = this.sendData.bind(this);
+  }
+  //componentDidMount will call once automatically after render()
+  //so here we are not using button click or onchange to call function automatically one time it is calling
+  componentDidMount(){
+    this.props.parentCallback("value from child");
+  }
+
+  
+
+  render() {
+    return (
+      
+    );
+  }
+}
