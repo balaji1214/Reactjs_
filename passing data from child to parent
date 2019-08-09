@@ -62,3 +62,27 @@ export default class Child2 extends React.Component {
     );
   }
 }
+
+//Child1.js
+import React from "react";
+export default class Child2 extends React.Component {
+  constructor() {
+    super();
+    this.sendData = this.sendData.bind(this);
+  }
+  componentDidMount(){
+    this.props.parentCallback("value from child");
+  }
+
+  sendData() {
+    // this.props.parentCallback("value from child");
+  }
+
+  render() {
+    return (
+      <div>
+        {/*<p>{this.sendData}</p>*/}
+      </div>
+    );
+  }
+}
