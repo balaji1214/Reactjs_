@@ -1,6 +1,7 @@
 //app.js
+import CheckBox2 from './path';
 <span >
-        <CheckBox2 passval2={this.tochild} />
+        <CheckBox2 />//this component will not display in browser
         </span>
       //app.css
       span{
