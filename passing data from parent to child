@@ -1,0 +1,74 @@
+//index.js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+serviceWorker.unregister();
+
+
+
+
+
+//App.js
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Parent1 from './Parent';
+function App() {
+  return (
+    <div className="App">
+     <Parent1/>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+//Parent.js
+import React from "react";
+import ChildComponent from "./Child";
+export default class Parent1 extends React.Component {
+render() {
+    return (
+      <div>
+        <ChildComponent message={"value from Parent Page 1"} />
+        **(//first import component to where you want to pass data(here i am passing  to ChildComponent)
+        //so,<componetname variable={'value to be passed'}/>)**
+        
+        <p>{this.state.message1}</p>
+      </div>
+    );
+  }
+}
+
+
+
+
+
+
+//Child.js
+
+import React from 'react';
+import Parent1 from './Parent';
+export default class ChildComponent extends React.Component {
+    render () {
+      return (
+        <div>
+        //succssfully data passed from parent to child following line of code will display on recieved data from parent component
+          <p>{this.props.message}</p>
+          
+        </div>
+      )
+    }
+  }
+  //following code is default dispaly in browser when nothing passed from parent to child.
+   Heading.defaultProps = {
+    message: 'Heading One'
+  }
