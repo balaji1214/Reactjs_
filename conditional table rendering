@@ -1,0 +1,32 @@
+
+import React from "react";
+export default class CheckBox2 extends React.Component {
+  render() {
+    var v = true;
+    return (
+      <div>
+        {/*     <input type='checkbox' onChange={this.call}/>Table*/}
+        <p>{this.props.passval}</p>
+        <input type='checkbox'/>
+        { v? (//v is true see line no5
+          <div class='col-md-4'>
+            <table class="table">
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Addr</th>
+              </tr>
+              <tr>
+                  <td>somex</td>
+                  <td>21</td>
+                  <td>hyd</td>
+              </tr>
+            </table>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  }
+}
