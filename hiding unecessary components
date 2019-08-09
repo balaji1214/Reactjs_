@@ -1,0 +1,8 @@
+//app.js
+<span >
+        <CheckBox2 passval2={this.tochild} />
+        </span>
+      //app.css
+      span{
+  display: none;
+}
