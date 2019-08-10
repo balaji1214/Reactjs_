@@ -1,0 +1,136 @@
+import React from 'react';
+
+class App1 extends React.Component {
+   constructor(props) {
+      super(props);
+      
+      this.state = {
+         data: 0
+      }
+      this.setNewNumber = this.setNewNumber.bind(this)
+   };
+   setNewNumber() {
+      this.setState({data: this.state.data + 1})
+   }
+   render() {
+      return (
+         <div>
+            <button onClick = {this.setNewNumber}>INCREMENT</button>
+            <Content myNumber = {this.state.data}></Content>
+         </div>
+      );
+   }
+}
+class Content extends React.Component {
+  /* componentWillMount() {
+      console.log('Component WILL MOUNT!')
+   }
+   componentDidMount() {
+      console.log('Component DID MOUNT!')
+  }*/
+   componentWillReceiveProps(newProps) {    
+      console.log('Component WILL RECIEVE PROPS!')
+   }
+   shouldComponentUpdate(newProps, newState) {
+    if(newProps!=newState)
+    
+    {
+        
+        return true;
+
+    }  
+
+    else
+    {
+        alert(false)
+        
+    }
+    
+   }
+   componentWillUpdate(nextProps, nextState) {
+      console.log('Component WILL UPDATE!');
+   }
+   componentDidUpdate(prevProps, prevState) {
+      console.log('Component DID UPDATE!')
+   }
+   
+   render() {
+      return (
+         <div>
+          {console.log('render')}
+         </div>
+      );
+   }
+}
+export default App1;
+
+import React from 'react';
+export default class ComponentWillMount_ extends React.Component
+{
+    
+    
+    componentDidMount()
+    {
+        console.log('componnet did mount');
+        
+    }
+    componentWillMount()
+    {
+        console.log('component will mountmethod_');
+    }
+    constructor()
+    {
+        super();
+        console.log('constructor');
+        this.state={value:'someval'}
+        
+    }
+    componentWillReceiveProps(newProps)
+    {   
+        console.log('component will recieve props')
+    }
+    render()
+    {
+        return(
+            <div>
+              {console.log( 'displaying from render method_')}
+                
+                </div>
+        );
+    }
+}
+
+
+import React from "react";
+import ComponentWillMount_ from './Lifecycle';
+import App1 from './P1';
+{/*import logo from "./logo.svg";
+import "./App.css";
+import Parent from './Parent';
+import Child from './Child';
+import Home from './Home';
+import DataSender from './P1';
+import DataReceiver from "./P2";
+import Thome from './THome';*/}
+
+class App extends React.Component {
+
+  render() {
+    return (
+      <div className="App">
+      
+      {/* <Home /> */}
+      
+      {/*<Thome/>//checkbox display and hide code*/}
+     { /*<DataSender>*/}
+    <ComponentWillMount_/>
+     <App1/>
+      </div>
+    );
+  }
+}
+export default App;
+
+
+
+
