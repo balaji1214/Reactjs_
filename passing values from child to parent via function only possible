@@ -1,0 +1,60 @@
+//Child
+import React from "react";
+import CheckBox1 from './Check1';
+export default class CheckBox2 extends React.Component {
+  constructor() {
+    super();
+    this.state = { check: false};
+    
+  }
+  
+  
+  handleOnchange(event){
+    this.props.changeCheck(event.target.checked)
+  }
+
+  render() {
+    var trueorfalse = this.props.passval;
+
+    return (
+      <div>
+
+   
+        <input type="checkbox"  onChange={this.handleOnchange.bind(this)} />
+        
+       
+      </div>
+    );
+  }
+}
+//parent component
+import React from "react";
+import CheckBox2 from "./Check3";
+import DataReceiver from "./P2";
+import { Link, Route, BrowserRouter } from "react-router-dom";
+export default class CheckBox1 extends React.Component {
+  constructor() {
+    super();
+    this.state = { checked: false};
+    
+  }
+  handleChangeCheck(_checked) {
+    this.setState({ checked: _checked });
+  }
+  render() {
+    return (
+      
+        <div>
+          
+         
+            <CheckBox2
+              changeCheck={this.handleChangeCheck.bind(this)}
+              passval={this.state.checked}
+            />
+         
+          
+        </div>
+      
+    );
+  }
+}
