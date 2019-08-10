@@ -1,0 +1,49 @@
+import React from "react";
+export default class JsonData extends React.Component {
+    constructor(){
+        super();
+        this.state={items:[]}
+        
+    
+    }
+    componentWillMount(){
+        fetch('https://swapi.co/api/people/?format=json')
+        .then(response=>response.json())
+        .then(({results:items})=>this.setState({items}))
+    }
+    filter(e)
+    {
+        this.setState({filter:e.target.value})
+    }
+    
+    render()
+    {
+        
+        let items=this.state.items;
+        if(this.state.filter){
+            items=items.filter(item=>
+                item.name.toLowerCase()
+                .includes(this.state.filter.toLowerCase()))
+        }
+        return(
+            <div >
+                <input type="text" placeholder='search..'
+                onChange={this.filter.bind(this)}/>
+
+                { /*items.map(items=><h4>{items.name}</h4>)*/}
+                <div class='col-md-4' >
+                <table class="table table-dark">
+                   <tr> <th>Name</th></tr>
+                    <td>
+                { items.map(item=>
+                <Person key={item.name} person={item}/>)}
+                </td>
+                </table>
+                </div>
+                </div>
+        )
+    }
+
+
+            }
+            const Person =(props)=><h4>{props.person.name}</h4>
