@@ -1,0 +1,182 @@
+/*
+import React from "react";
+import PropTypes from "prop-types";
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+// core components
+import tableStyle from "assets/jss/material-dashboard-react/components/tableStyle.jsx";
+
+function CustomTable({ ...props }) {
+  
+  const { classes, tableHead, tableData, tableHeaderColor } = props;
+  return (
+    <div className={classes.tableResponsive}>
+      <Table className={classes.table}>
+        {tableHead !== undefined ? (
+          <TableHead className={classes[tableHeaderColor + "TableHeader"]}>
+            <TableRow className={classes.tableHeadRow}>
+              {tableHead.map((prop, key) => {
+                return (
+                  <TableCell
+                    className={classes.tableCell + " " + classes.tableHeadCell}
+                    key={key}
+                  >
+                    {prop}
+                  </TableCell>
+                );
+              })}
+            </TableRow>
+          </TableHead>
+        ) : null}
+        <TableBody>
+          {tableData.map((prop, key) => {
+            return (
+              <TableRow key={key} className={classes.tableBodyRow}>
+                {prop.map((prop, key) => {
+                  return (
+                    <TableCell className={classes.tableCell} key={key}>
+                      {prop}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+        <tbody>
+        <tr>
+          <td>
+          <input type='text' size ='4' /></td>
+          <td><input type='text' size ='4' /></td>
+
+        <td > <input type='text' size ='4' /></td>
+          <td><input type='text' size ='4' /></td>
+        <button>Add</button>
+        </tr>
+
+        </tbody>
+      </Table>
+      
+    </div>
+  );
+}
+
+CustomTable.defaultProps = {
+  tableHeaderColor: "gray"
+};
+
+CustomTable.propTypes = {
+  classes: PropTypes.object.isRequired,
+  tableHeaderColor: PropTypes.oneOf([
+    "warning",
+    "primary",
+    "danger",
+    "success",
+    "info",
+    "rose",
+    "gray"
+  ]),
+  tableHead: PropTypes.arrayOf(PropTypes.string),
+  tableData: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+};
+
+export default withStyles(tableStyle)(CustomTable);
+*/
+import React from "react";
+export default class CustomTable extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      newStudent: { id: "", name: "", age: "", address: "", phnum: "" },
+      students: [
+        { id: 1, name: "somex", age: 21, address: "hyd", phnum: "8795166544" }
+      ]
+    };
+    this.add = this.add.bind(this);
+    this.Txtval = this.add.bind(this);
+  }
+
+  // componentDidUpdate() {
+  //   {
+  //     this.renderTableData();
+  //   }
+  // }
+  renderTableData() {
+    return this.state.students.map((student, index) => {
+      const { id, name, age, address, phnum } = student;
+      return (
+        <tr key={index}>
+          <td>{id}</td>
+          <td>{name}</td>
+          <td>{age}</td>
+          <td>{address}</td>
+
+          <td>{phnum}</td>
+        </tr>
+      );
+    });
+  }
+
+  add() {
+    this.setState({
+      id: "3",
+      name: "d",
+      age: "22",
+      address: "ds",
+      phnum: "5444"
+    });
+  }
+
+  Txtval(key, e) {
+    this.setState({
+      newStudent: { ...this.state.newStudent, [key]: e.target.value }
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <table>
+          <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Phonenumber</th>
+          </thead>
+          <tbody>{this.renderTableData()}</tbody>
+          <tr>
+            <td>
+              <input
+                type="text"
+                size="4"
+                value={this.state.newStudent.id}
+                onChange={e => this.Txtval("id", e)}
+              />
+            </td>
+            <td>
+              <input type="text" size="4" />
+            </td>
+
+            <td>
+              {" "}
+              <input type="text" size="4" />
+            </td>
+            <td>
+              <input type="text" size="4" />
+            </td>
+            <td>
+              <input type="text" size="4" />
+            </td>
+            <button onClick={this.add}>Add</button>
+          </tr>
+        </table>
+      </div>
+    );
+  }
+}
