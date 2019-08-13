@@ -1,0 +1,168 @@
+//Childcomponent.js
+import React from "react";
+import PropTypes from "prop-types";
+import Checkbox from "@material-ui/core/Checkbox";
+import withStyles from "@material-ui/core/styles/withStyles";
+
+const styles = {
+  cardCategoryWhite: {
+    color: "rgba(255,255,255,.62)",
+    margin: "0",
+    fontSize: "14px",
+    marginTop: "0",
+    marginBottom: "0"
+  },
+  cardTitleWhite: {
+    color: "#FFFFFF",
+    marginTop: "0px",
+    minHeight: "auto",
+    fontWeight: "300",
+    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+    marginBottom: "3px",
+    textDecoration: "none"
+  }
+};
+
+class UserProfile extends React.Component {
+  constructor() {
+    super();
+    this.state = { show: false, show1: false };
+    //newdata:{id:''}
+    this.Show = this.Show.bind(this);
+    this.Show1 = this.Show1.bind(this);
+    //this.value = this.value.bind(this);
+  }
+
+  Show(event) {
+    var lkfs = [...lkfs, ...event];
+    this.setState({ show: event.target.checked });
+  }
+  Show1(event) {
+    this.setState({ show1: event.target.checked });
+  }
+
+  render() {
+    const { location } = this.props;
+    const value = location && location.state ? location.state.data : {};
+    var value1 = value.checked;
+    var value2 = value.checked1;
+    
+    return (
+      <div>
+        <Checkbox
+          value="checkedA"
+          onChange={this.Show}
+          checked={this.state.show}
+        />
+        Table
+        <br />
+        <Checkbox
+          value="checkedA"
+          onChange={this.Show1}
+          checked={this.state.show1}
+        />{" "}
+        Form
+        <div>
+          {this.state.show ? (
+            <table>
+              <thead class="table table-striped">
+                <th> id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>phonenum</th>
+              </thead>
+              <tbody></tbody>
+            </table>
+          ) : (
+            ""
+          )}
+          {this.state.show1 ? (
+            <form>
+              <div class="form-group">
+                Id
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" />
+                <br />
+                Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+                <input type="text" />
+                <br />
+                Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" />
+                <br />
+                Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" />
+                <br />
+                phonenum&nbsp; <input type="text" />
+                <br />
+                <button class="btn btn-primary">Add</button>&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary">Delete</button>
+              </div>
+            </form>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+UserProfile.propTypes = {
+  location: PropTypes.object
+};
+
+export default withStyles(styles)(UserProfile);
+
+
+//parentcomponet
+import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
+import PropTypes from "prop-types";
+import Checkbox from "@material-ui/core/Checkbox";
+import UserProfile from "views/UserProfile/UserProfile.jsx";
+import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
+
+class Dashboard extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      checked: "",
+      checked1: ""
+    };
+    this.Check = this.Check.bind(this);
+    this.Check1 = this.Check1.bind(this);
+    this.statetransfer = this.statetransfer.bind(this);
+  }
+  Check(e) {
+    this.setState({ checked: e.target.checked });
+  }
+  Check1(e) {
+    this.setState({ checked1: e.target.checked });
+  }
+  statetransfer() {
+    this.props.history.push({
+      pathname: "/admin/user",
+      state: {
+        data: { checked: this.state.checked, checked1: this.state.checked1 }
+      }
+    });
+  }
+  render() {
+    return (
+      <div>
+        <Checkbox value="checkedA" onChange={this.Check} />
+        Table
+        <br />
+        <Checkbox value="checkedA" onChange={this.Check1} /> Form
+        <br />
+        <button className="btn btn-primary" onClick={this.statetransfer}>
+          Navigate
+        </button>
+      </div>
+    );
+  }
+}
+Dashboard.propTypes = {
+  history: PropTypes.func
+};
+
+export default withStyles(dashboardStyle)(Dashboard);
