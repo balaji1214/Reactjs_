@@ -1,0 +1,232 @@
+//App.js
+import React from "react";
+import ComponentWillMount_ from "./Lifecycle";
+import App1 from "./P1";
+import JsonData from "./Detail";
+import JsonTable from "./JsonTab";
+import JsonDataFrom from "./shoppingcart";
+import ButtonAppBar from "./Mat";
+import { Link, Route, BrowserRouter, withRouter } from "react-router-dom";
+
+// import Thome from "./THome";
+import CheckBox1 from './Check1';
+import CheckBox2 from "./Check3";
+
+{
+  /*import logo from "./logo.svg";
+import "./App.css";
+import Parent from './Parent';
+import Child from './Child';
+import Home from './Home';
+import DataSender from './P1';
+import DataReceiver from "./P2";
+import Thome from './THome';*/
+}
+
+class App extends React.Component {
+  constructor()
+  {
+    super();
+    this.state={
+      message:false
+    }
+    
+
+  }
+  
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter> 
+          <Route exact path={"/"} component={CheckBox1} /> 
+          <Route path={"/Check3"} component={CheckBox2} />
+        </BrowserRouter> 
+        
+        
+      </div>
+    );
+  }
+}
+export default App;
+
+ //Check1.js
+ import React from "react";
+import CheckBox2 from "./Check3";
+import PropTypes from "prop-types";
+import DataReceiver from "./P2";
+import Multiselect from "multiselect-dropdown-react";
+
+import { Link, Route, BrowserRouter, withRouter } from "react-router-dom";
+
+
+const data = [
+  {
+    name: "id",
+    value: "id"
+  },
+  {
+    name: "name",
+    value: "name"
+  },
+  {
+    name: "age",
+    value: "age"
+  },
+  {
+    name: "address",
+    value: "address"
+  },
+  {
+    name: "phonenumber",
+    value: "phonenumber"
+  }
+];
+export default class CheckBox1 extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      senddata: [],
+      sendval: false,
+      checked: false,
+      nexpage: false,
+      value: null,
+      show: false,
+      arry: []
+    };
+    /*this.call = this.call.bind(this);
+
+    this.call2 = this.call2.bind(this);
+    this.show1 = this.show1.bind(this);
+    this.parentCallback = this.parentCallback.bind(this);*/
+    this.Send = this.Send.bind(this);
+    this.result = this.result.bind(this);
+  }
+ 
+    
+  result(params) {
+    console.log(params);
+
+    this.setState({ senddata: params });
+  }
+
+  Send() {
+    debugger;
+    
+    this.props.history.push({
+      pathname: "/Check3",
+      state: {
+        senddata: this.state.senddata
+        
+      }
+      
+    });
+    /*call(event) { 
+    this.setState({ checked: event.target.checked });
+  }
+  parentCallback(data) {
+    this.setState({ value: data });
+  }
+  call2() {
+    this.setState({ nexpage: true });
+  }
+  show1() {
+    {
+      this.setState({ show: true });
+    }
+  }
+
+  handleChangeCheck(_checked) {
+    this.setState({ checked: _checked });
+  }*/
+  }
+  render() {
+    return (
+      <div className="row">
+        <div className="col-sm-3">
+          <Multiselect options={data} onSelectOptions={this.result} />
+
+          <button onClick={this.Send}>Send</button>
+          {this.state.senddata.toString()}
+
+         
+        </div>
+      </div>
+
+      /* 
+       <BrowserRouter>
+       <input
+            type="checkbox"
+            checked={this.state.checked}
+            onChange={this.call}
+          />
+          Table
+          <button onClick={this.show1}>navigate</button>
+          {this.state.show ? (
+            <CheckBox2
+              changeCheck={this.handleChangeCheck.bind(this)}
+              passval={this.state.checked}
+            />
+          ) : (
+            ""
+          )} 
+          <span>
+            <CheckBox2 parentCallback={this.parentCallback} />
+          </span>
+          {/* <button onClick={this.call2}>nextpage</button>
+        {this.state.nexpage?<CheckBox2/>:''} 
+        </BrowserRouter>*/
+    );
+  }
+}
+CheckBox1.propTypes = {
+  history: PropTypes.object
+};
+//Checkbox3.js
+import React from "react";
+import CheckBox1 from "./Check1";
+import { checkPropTypes } from "prop-types";
+import PropTypes from "prop-types";
+import Multiselect from "multiselect-dropdown-react";
+export default class CheckBox2 extends React.Component {
+  constructor() {
+    super();
+    this.state = { check: false, nav: "false" };
+    //this.nav_=this.nav_.bind(this);
+
+    //**  var value1=values.
+  }
+
+  /* componentDidUpdate(prevProps, prvStates) {
+    if (prevProps !== this.props) {
+      this.setState({ check: this.props.passval });
+    }
+  }
+  componentDidMount()
+  {
+    this.props.parentCallback({});
+  }*/
+  /*nav_()
+  {
+    this.setState({nav:true})
+  }  
+  handleOnchange(event){
+    this.props.changeCheck(event.target.checked)
+  }
+*/
+  render() { 
+    //var trueorfalse = this.props.passval;
+    debugger;
+    const { location } = this.props;
+    const values = location && location.state ? location.state.senddata : {};
+    var get = values[0];var get1 = values[1];var get2 = values[2];var get3 = values[3];var get4 = values[4];var get5 = values[5];
+    
+    return <div>
+    {get}{get1}{get2}{get3}{get4}{get5}
+
+    
+    </div>;
+  } 
+}
+
+
