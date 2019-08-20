@@ -1,0 +1,348 @@
+import React from "react";
+import jsondata from "./jsondata";
+export default class Table extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      Jsondata: jsondata,
+      textboxes: false,
+      hide: true,
+      filter: "",
+      search: "",
+      array_: [],
+      form: false,
+      id: "",
+      name: "",
+      DOB: "",
+      image: "",
+      phonenumber: "",
+      attendance: "",
+      newData: [],
+      txt1: null,
+      txt2: "",
+      txt3: "",
+      txt4: "",
+      txt5: "",
+      txt6: ""
+    };
+    this.Hide = this.Hide.bind(this);
+    this.Delete = this.Delete.bind(this);
+    this.Add = this.Add.bind(this);
+    this.update = this.update.bind(this);
+  }
+  renderHead = item => (
+    <tr>
+      <td>{item.id}</td>
+      <td>{item.name}</td>
+      <td>{item.DOB}</td>
+      <td>{item.image}</td>
+      <td>{item.phonenumber}</td>
+      <td>{item.attendance}</td>
+      <td>
+        {
+          <button className="btn btn-success" onClick={() => this.Hide(item)}>
+            Edit
+          </button>
+        }
+
+        {
+          <button className="btn btn-success" onClick={() => this.Delete(item)}>
+            Delete
+          </button>
+        }
+      </td>
+    </tr>
+  );
+  Id(e) {
+    this.setState({ id: e.target.value });
+  }
+  Name(e) {
+    this.setState({ name: e.target.value });
+  }
+  DOB(e) {
+    this.setState({ DOB: e.target.value });
+  }
+  Image(e) {
+    this.setState({ image: e.target.value });
+  }
+  Phonenumber(e) {
+    this.setState({ phonenumber: e.target.value });
+  }
+  Attendance(e) {
+    this.setState({ attendance: e.target.value });
+  }
+  ADD() {
+    this.setState({ textboxes: true });
+  }
+  Hide(val) {
+    this.setState({ hide: false });
+    this.setState({ form: true });
+    var id = val.id;
+    var name = val.name;
+    var dob = val.DOB;
+    var image = val.image;
+    var phonenumber = val.phonenumber;
+    var attendance = val.attendance;
+    this.setState({ txt1: id });
+    this.setState({ txt2: name });
+    this.setState({ txt3: dob });
+    this.setState({ txt4: image });
+    this.setState({ txt5: phonenumber });
+    this.setState({ txt6: attendance });
+    console.log();
+    console.log(name);
+    console.log(dob);
+    console.log(image);
+    console.log(phonenumber);
+    console.log(attendance);
+  }
+  Back() {
+    this.setState({ hide: true });
+    this.setState({ form: false });
+  }
+  Add() {
+    let data;
+    var Id1 = parseInt(this.state.id);
+    var Id = Id1;
+    var Name = this.state.name;
+    var DOB = this.state.DOB;
+    var Image = this.state.image;
+    var Phonenumber = this.state.phonenumber;
+    var Attendance = this.state.attendance;
+    // data = {
+    //   id: Id,
+    //   name: Name,
+    //   DOB: DOB,
+    //   image: Image,
+    //   phonenumber: Phonenumber,
+    //   attendance: Attendance
+    // };
+
+    this.setState({
+      Jsondata: [
+        ...this.state.Jsondata,
+        {
+          id: Id,
+          name: Name,
+          DOB: DOB,
+          image: Image,
+          phonenumber: Phonenumber,
+          attendance: Attendance
+        }
+      ]
+    });
+    // this.setState({ Jsondata: [...this.state.Jsondata, data] });
+    // this.setState({ Jsondata: [...this.state.Jsondata.push(data)] });
+    console.log(this.state.Jsondata);
+  }
+  Delete(value) {
+    let Jsondata = this.state.Jsondata.filter(item => item.id !== value.id);
+    this.setState({ Jsondata: Jsondata });
+  }
+  update(txt1, txt2, txt3, txt4, txt5, txt6) {
+    // alert(txt1);alert(txt2);alert(txt3);alert(txt4);alert(txt5);alert(txt6);
+
+    this.setState({
+      Jsondata: this.state.Jsondata.map(item => {
+        if (txt1 === item.id) {
+          return {
+            id: txt1,
+            name: txt2,
+            DOB: txt3,
+            image: txt4,
+            phonenumber: txt5,
+            attendance: txt6
+          };
+        }
+        return item;
+      })
+    });
+  }
+  filter(e) {
+    this.setState({
+      newData: this.state.Jsondata.filter(item =>
+        item.name.toLowerCase().includes(e.target.value.toLowerCase())
+      ),
+      filter: e.target.value
+    });
+  }
+  Change(e) {
+    this.setState({ txt2: e.target.value });
+  }
+  Change1(e) {
+    this.setState({ txt3: e.target.value });
+  }
+  Change2(e) {
+    this.setState({ txt4: e.target.value });
+  }
+  Change3(e) {
+    this.setState({ txt5: e.target.value });
+  }
+  Change4(e) {
+    this.setState({ txt6: e.target.value });
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.hide ? (
+          <div>
+            <input
+              type="text"
+              placeholder="search"
+              onChange={this.filter.bind(this)}
+              className="text"
+            />
+            <div className="btn">
+              {" "}
+              <button className="btn btn-primary" onClick={this.ADD.bind(this)}>
+                Add
+              </button>
+            </div>
+            <table border="3" className="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  <th>DOB</th>
+                  <th>Image</th>
+                  <th>Phonenumber</th>
+                  <th>Attendance</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.filter
+                  ? this.state.newData.map(item => this.renderHead(item))
+                  : this.state.Jsondata.map(item => this.renderHead(item))}
+              </tbody>
+              {this.state.textboxes ? (
+                <tr>
+                  <td>
+                    <input type="text" size="4" onChange={this.Id.bind(this)} />{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <input
+                      type="text"
+                      size="4"
+                      onChange={this.Name.bind(this)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      size="4"
+                      onChange={this.DOB.bind(this)}
+                    />{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <input
+                      type="text"
+                      size="4"
+                      onChange={this.Image.bind(this)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      size="4"
+                      onChange={this.Phonenumber.bind(this)}
+                    />{" "}
+                  </td>
+                  <td>
+                    {" "}
+                    <input
+                      type="text"
+                      size="4"
+                      onChange={this.Attendance.bind(this)}
+                    />
+                  </td>
+                  <td>
+                    <button class="btn btn-primary" onClick={this.Add}>
+                      ADD
+                    </button>
+                  </td>
+                </tr>
+              ) : (
+                ""
+              )}
+            </table>
+          </div>
+        ) : (
+          ""
+        )}
+        {this.state.form ? (
+          <div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Id
+            <input type="text" value={this.state.txt1} />
+            <br />{" "}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Name
+            <input
+              type="text"
+              value={this.state.txt2}
+              onChange={this.Change.bind(this)}
+            />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            DOB
+            <input
+              type="text"
+              value={this.state.txt3}
+              onChange={this.Change1.bind(this)}
+            />
+            <br />
+            &nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Image
+            <input
+              type="text"
+              value={this.state.txt4}
+              onChange={this.Change2.bind(this)}
+            />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Phonenumber
+            <input
+              type="text"
+              value={this.state.txt5}
+              onChange={this.Change3.bind(this)}
+            />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Attendance
+            <input
+              type="text"
+              value={this.state.txt6}
+              onChange={this.Change4.bind(this)}
+            />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button
+              className="btn btn-primary"
+              onClick={() =>
+                this.update(
+                  this.state.txt1,
+                  this.state.txt2,
+                  this.state.txt3,
+                  this.state.txt4,
+                  this.state.txt5,
+                  this.state.txt6
+                )
+              }
+            >
+              save
+            </button>
+            <button onClick={this.Back.bind(this)} className="btn btn-primary">
+              Back
+            </button>
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  }
+}
